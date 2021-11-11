@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>memo</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+    <header>
+        <h1>ルドルフPAD</h1>
+    </header>
+    <main>
+        <div class="memo_main_box" id="memo_main_box">
+            <div class="text_box">
+                <h2>目標</h2>
+                <!--プレイヤーのテキスト打ちこみエリア-->
+                <textarea id="text_area" class="text_area"> </textarea>
+                <!--ボタン類-->
+                <div class="btn_box">
+                    <button class="button" id="btn_save" href="#">Save</button>
+                    <div class="count_btn" id="count_btn">
+                        <button class="button2" id="clear_ok">できた！</button>
+                        <button class="button3" id="clear_no">ぴえん…</button>
+                    </div>
+                </div>
+                <h2>返事</h2>
+                <!--ルドルフ返事-->
+                <div class="reply_box">
+                    <p id="TextTyping" class="TextTyping"></p>
+                </div>
+            </div>
+            <div class="img_box">
+                <!--ルドルフ画像-->
+                <div class="tachi_box">
+                    <img src="img/rudorufu.png" alt="" class="tachi" id="tachi">
+                </div>
+                <!--ルドルフ一言-->
+                <div class="balloon1-top">
+                    <p id="chara_text">唯一抜きん出て、並ぶもの無し</p>
+                </div>
+                <!--ルドルフ好感度-->
+                <progress id="okcounter" max="20" value="0"> 0% </progress>
+            </div>
+        </div>
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        ////////////////////ボタン類//////////////////////////
+        //保存ボタン//
+        $("#btn_save").on("click", function () {
+            const data = {
+                text: $("#text_area").val(),
+            };
+            const jasondata = JSON.stringify(data);
+            localStorage.setItem("memo", jasondata);
+        });
+        //できたボタン//
+        $("#clear_ok").one("click", function () {
+            $("#clear_no").attr("disabled", true);
+            localStorage.removeItem("memo");
+            $("#text_area").val("");
+            var thisCount = $("#okcounter").val();
+            thisCount = Number(thisCount);
+            thisCount = thisCount + 5;
+            $("#okcounter").val(thisCount);
+            const mater = {
+                okcount: $("#okcounter").val(),
+            };
+            const jasondata2 = JSON.stringify(mater);
+            localStorage.setItem("koukando", jasondata2);
+        });
+        //ぴえんボタン//
+        $("#clear_no").one("click", function () {
+            $("#clear_ok").attr("disabled", true);
+            localStorage.removeItem("memo");
+            $("#text_area").val("");
+            var thisCount = $("#okcounter").val();
+            thisCount = Number(thisCount);
+            thisCount = thisCount - 5;
+            $("#okcounter").val(thisCount);
+            const mater = {
+                okcount: $("#okcounter").val(),
+            };
+            const jasondata2 = JSON.stringify(mater);
+            localStorage.setItem("koukando", jasondata2);
+        });
+        ////////////////////ボタン類//////////////////////////
+
+        ////////////////////メモ内容読み込む//////////////////////////
+        if (localStorage.getItem("memo")) {
+            const jasondata = localStorage.getItem("memo");
+            const data = JSON.parse(jasondata);
+            $("#text_area").val(data.text);
+            $("#count_btn").show();
+        } else {
+            $("#count_btn").hide();
+        };
+        ////////////////////メモ内容読み込む//////////////////////////
+
+        ////////////////////高感度読み込む//////////////////////////
+        if (localStorage.getItem("koukando")) {
+            const jasondata2 = localStorage.getItem("koukando");
+            const mater = JSON.parse(jasondata2);
+            $("#okcounter").val(mater.okcount);
+        }
+        ////////////////////高感度読み込む//////////////////////////
+
+        ////////////////////画面読み込み時テキスト//////////////////////////
+        window.onload = function () {
+            if ($("#okcounter").val() === 0) {
+                $("#TextTyping").html("本校は、全国のウマ娘トレーニング施設の中でも、最大規模、十全十美のカリキュラムで、優美高妙なウマ娘と切磋琢磨し、己の研鑽に粉骨砕身の努力で、品行方正……");
+            }
+            else if ($("#okcounter").val() === 5) {
+                $("#chara_text").html("生姜がないなんて、しょうがないなぁ。ふふっ");
+                $("#TextTyping").html("勝利もさることながら、如何様な勝ち方をするか……そこにも意識を向けたいものだ");
+            }
+            else if ($("#okcounter").val() === 10) {
+                $("#chara_text").html("いもが、ポテっとおちた。ふふっ");
+                $("#TextTyping").html("近ごろのトレーナー君を見ていると、私もやる気が溢れてくる。さっそく夕日を見ながら腹筋を3セット……サンセット……ふふっ");
+            }
+            else if ($("#okcounter").val() === 15) {
+                $("#chara_text").html("この蔵、クーラーがきいている…。ふふっ");
+                $("#TextTyping").html("我々の理想はいまだ遠く、仕事は枚挙に暇がない。この先も休息などないぞ。それでも君は……やはり隣に、立ち続けてくれるのだろう");
+            }
+            else if ($("#okcounter").val() === 20) {
+                $("#chara_text").html("調子は最高だ。トレーニングにさぁ行こう！");
+                $("#TextTyping").html("さすがは私のトレーナー君だ、いつも感謝しているよ。レースには絶対はないが、今の私とトレーナー君なら見せれるだろう……絶対の走りを");
+            }
+        };
+        ////////////////////画面読み込み時テキスト//////////////////////////
+
+        ////////////////////タイピング風テキスト//////////////////////////
+        // TextTypingというクラス名がついている子要素（span）を表示から非表示にする定義
+        function TextTypingAnime() {
+            $('.TextTyping').each(function () {
+                var elemPos = $(this).offset().top - 50;
+                var scroll = $(window).scrollTop();
+                var windowHeight = $(window).height();
+                var thisChild = "";
+                if (scroll >= elemPos - windowHeight) {
+                    thisChild = $(this).children(); //spanタグを取得
+                    //spanタグの要素の１つ１つ処理を追加
+                    thisChild.each(function (i) {
+                        var time = 100;
+                        //時差で表示する為にdelayを指定しその時間後にfadeInで表示させる
+                        $(this).delay(time * i).fadeIn(time);
+                    });
+                } else {
+                    thisChild = $(this).children();
+                    thisChild.each(function () {
+                        $(this).stop(); //delay処理を止める
+                        $(this).css("display", "none"); //spanタグ非表示
+                    });
+                }
+            });
+        }
+        // 画面をスクロールをしたら動かしたい場合の記述
+        $(window).scroll(function () {
+            TextTypingAnime();/* アニメーション用の関数を呼ぶ*/
+        });// ここまで画面をスクロールをしたら動かしたい場合の記述
+
+        // 画面が読み込まれたらすぐに動かしたい場合の記述
+        $(window).on('load', function () {
+            //spanタグを追加する
+            var element = $(".TextTyping");
+            element.each(function () {
+                var text = $(this).html();
+                var textbox = "";
+                text.split('').forEach(function (t) {
+                    if (t !== " ") {
+                        textbox += '<span>' + t + '</span>';
+                    } else {
+                        textbox += t;
+                    }
+                });
+                $(this).html(textbox);
+            });
+            TextTypingAnime();/* アニメーション用の関数を呼ぶ*/
+        });// ここまで画面が読み込まれたらすぐに動かしたい場合の記述
+        ////////////////////タイピング風テキスト//////////////////////////
+    </script>
+</body>
+
+</html>

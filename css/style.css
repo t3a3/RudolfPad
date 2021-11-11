@@ -1,0 +1,244 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 1800px;
+    margin: 0 auto;
+  }
+h1{
+    text-align: center;
+  }
+h2{
+    font-size: 50px;
+    color: #07573c;
+    margin: 0;
+  }
+/*========= タイピング ===============*/
+.TextTyping span {
+  display: none;
+}
+/*文字列後ろの線の設定*/
+.TextTyping::after {
+  content: "|";
+  animation: typinganime .8s ease infinite;
+}
+@keyframes typinganime{
+  from{opacity:0}
+  to{opacity:1}
+} 
+/*========= タイピング ===============*/
+
+/*
+－－－－画面全体－－－－
+*/
+.memo_main_box{
+  display: flex;
+}
+
+/*
+－－－－メイン画面左側の配置－－－－
+*/
+.text_box{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.btn_box{
+text-align: center;
+margin-top: 20px;
+}
+
+/*
+－－－－プレイヤーのテキストエリア－－－－
+*/
+.text_area {
+  background-color: #fff; /* 背景色 */
+  background-image: linear-gradient(90deg, transparent 0%, transparent 50%, #fff 50%, #fff 100%), /* 点線1の色 */
+                    linear-gradient(180deg, #ccc 1px, transparent 1px); /* 点線2の色と太さ */
+  background-size: 8px 100%, /* 点線1のサイズ */
+                   100% 2.5em; /* 点線2のサイズ */
+  line-height: 2.5em; /* 文字の高さ */
+  padding-bottom: 1px; /* 最終行の下にも罫線を引く */
+  color: black; /* 文字色 */
+  font-weight: bold; font-size: 130%;
+  width: 1000px;
+  height: 170px;
+  font-size: 1.5rem;
+}
+
+/*
+－－－－ルドルフのテキストエリア－－－－
+*/
+.reply_box{
+  width: 1000px;
+  height: 156px;
+  background-color: white;
+  background-image: linear-gradient(90deg, transparent 0%, transparent 50%, #fff 50%, #fff 100%), /* 点線1の色 */
+                    linear-gradient(180deg, #ccc 1px, transparent 1px); /* 点線2の色と太さ */
+  background-size: 8px 100%, /* 点線1のサイズ */
+                   100% 2.5em; /* 点線2のサイズ */
+  line-height: 2.5em; /* 文字の高さ */
+  padding-bottom: 1px; /* 最終行の下にも罫線を引く */
+  color: black; /* 文字色 */
+  font-weight: bold; font-size: 130%;
+}
+.TextTyping {
+  text-align: center;
+  margin: 10px 0;
+  font-size: 1.5rem;
+  letter-spacing: .5em;
+  overflow-wrap: break-word;
+  text-align:left;
+}
+/*
+－－－－ルドルフのテキストエリア－－－－
+*/
+
+/*
+－－－－ボタン類－－－－
+*/
+  /*－－SAVE－－*/
+  .button {
+    color: #333;
+    font-size: 16px;
+    font-weight: bold;
+    background: #fff;
+    padding: 18px 30px;
+    border: 3px solid #333;
+    box-shadow: 0 5px 0 #333;
+    border-radius: 6px;
+    display: inline-block;
+    transition: .3s;
+  }
+  .button:hover {
+    transform: translateY(5px);
+    box-shadow: 0 0 0 #333;
+    color: #fff;
+    background: #000000;
+  }
+  /*－－できた、ぴえんBOX－－*/
+  .count_btn{
+    margin: 20px 0 20px 0;
+  }
+  /*－－できた！－－*/
+  .button2 {
+    color: #333;
+    font-size: 16px;
+    font-weight: bold;
+    background: #fff;
+    padding: 18px 30px;
+    border: 3px solid #333;
+    box-shadow: 0 5px 0 #333;
+    border-radius: 6px;
+    display: inline-block;
+    transition: .3s;
+  }
+  .button2:hover {
+    transform: translateY(5px);
+    box-shadow: 0 0 0 #333;
+    color: #fff;
+    background: #fe5f95;
+  }
+  /*－－ぴえん…－－*/
+  .button3 {
+    color: #333;
+    font-size: 16px;
+    font-weight: bold;
+    background: #fff;
+    padding: 18px 30px;
+    border: 3px solid #333;
+    box-shadow: 0 5px 0 #333;
+    border-radius: 6px;
+    display: inline-block;
+    transition: .3s;
+  }
+  .button3:hover {
+    transform: translateY(5px);
+    box-shadow: 0 0 0 #333;
+    color: #fff;
+    background: #775ffe;
+  }
+
+/*
+－－－－メイン画面右側の配置－－－－
+*/
+.img_box{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 800px;
+}
+
+/*
+－－－－立ち絵－－－－
+*/
+.tachi_box{
+  text-align: center;
+  height: 700px;
+  background-image: url(../img/show.png);
+  background-size: cover;
+  width: 90%;
+}
+/**/
+.tachi{
+  width: 65%;
+}
+
+/*
+－－－－吹き出し－－－－
+*/
+  .balloon1-top {
+    position: relative;
+    display: inline-block;
+    margin: 1.5em 0;
+    padding: 7px 10px;
+    max-width: 500px;
+    color: #555;
+    font-size: 16px;
+    background: rgb(210, 247, 210);
+  }
+  .balloon1-top:before {
+    content: "";
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    margin-left: -15px;
+    border: 15px solid transparent;
+    border-bottom: 15px solid rgb(210, 247, 210);
+  }
+  .balloon1-top p {
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+  }
+
+/*
+－－－－好感度－－－－
+*/
+progress {
+  -webkit-appearance: none;
+  width: 300px;
+  height: 30px;
+}
+::-webkit-progress-bar {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 8px #07573c;
+}
+::-webkit-progress-value {
+  background-color: rgb(255, 0, 85);
+  border-radius: 5px;
+}
+
+
+
+/* スマホ用（ウィンドウ幅が0〜479pxの場合に適用するCSS）
+@media screen and ( max-width:498px )
+{
+	#tachi{
+    width: 50%;
+  }
+}
+ */
