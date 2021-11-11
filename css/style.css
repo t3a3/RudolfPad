@@ -77,7 +77,7 @@ margin-top: 20px;
 */
 .reply_box{
   width: 100%;
-  height: 156px;
+  height: 250px;
   background-color: white;
   background-image: linear-gradient(90deg, transparent 0%, transparent 50%, #fff 50%, #fff 100%), /* 点線1の色 */
                     linear-gradient(180deg, #ccc 1px, transparent 1px); /* 点線2の色と太さ */
@@ -244,16 +244,9 @@ progress {
 /* スマホ用（ウィンドウ幅が0〜479pxの場合に適用するCSS）*/
 @media screen and ( max-width:479px )
 {
-	.main{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-}
+
 .memo_main_box{
-  margin: 0 10px 0 10px;
+  margin: 0 5px 0 5px;
 }
 h1{
     text-align: center;
@@ -285,16 +278,16 @@ h2{
 /*
 －－－－メイン画面左側の配置－－－－
 */
+.memo_main_box{
+  text-align: center;
+}
 .text_box{
-  justify-content: center;
-  align-items: center;
   width: 100%;
   height: 100%;
 }
 .btn_box{
 text-align: center;
-width: 70%;
-margin-top: 20px;
+margin: 10px 0 10px 0;
 }
 
 /*
@@ -309,18 +302,15 @@ margin-top: 20px;
   line-height: 1em; /* 文字の高さ */
   padding-bottom: 1px; /* 最終行の下にも罫線を引く */
   color: black; /* 文字色 */
-  font-weight: bold; font-size: 130%;
-  width: 100%;
-  height: 30%;
-  font-size: 1rem;
+  font-weight: bold; 
+  width: 90%;
+  height: 50px;
 }
 
 /*
 －－－－ルドルフのテキストエリア－－－－
 */
 .reply_box{
-  width: 100%;
-  height: 100%;
   background-color: white;
   background-image: linear-gradient(90deg, transparent 0%, transparent 50%, #fff 50%, #fff 100%), /* 点線1の色 */
                     linear-gradient(180deg, #ccc 1px, transparent 1px); /* 点線2の色と太さ */
@@ -329,6 +319,8 @@ margin-top: 20px;
   line-height: 1em; /* 文字の高さ */
   padding-bottom: 1px; /* 最終行の下にも罫線を引く */
   color: black; /* 文字色 */
+  width: 100%;
+  height: 100px;
   font-weight: bold; 
 }
 .TextTyping {
@@ -352,12 +344,13 @@ margin-top: 20px;
     font-size: 16px;
     font-weight: bold;
     background: #fff;
-    padding: 18px 30px;
+    padding: 5px 10px;
     border: 3px solid #333;
     box-shadow: 0 5px 0 #333;
     border-radius: 6px;
     display: inline-block;
     transition: .3s;
+    text-align: center;
   }
   .button:hover {
     transform: translateY(5px);
@@ -376,7 +369,7 @@ margin-top: 20px;
     font-size: 16px;
     font-weight: bold;
     background: #fff;
-    padding: 18px 30px;
+    padding: 5px 10px;
     border: 3px solid #333;
     box-shadow: 0 5px 0 #333;
     border-radius: 6px;
@@ -396,7 +389,7 @@ margin-top: 20px;
     font-size: 16px;
     font-weight: bold;
     background: #fff;
-    padding: 18px 30px;
+    padding: 5px 10px;
     border: 3px solid #333;
     box-shadow: 0 5px 0 #333;
     border-radius: 6px;
@@ -414,24 +407,18 @@ margin-top: 20px;
 /*
 －－－－メイン画面右側の配置－－－－
 */
-.img_box{
-  justify-content: center;
-  align-items: center;
-  height: 90%;
-  width: 30%;
-}
-
 /*
 －－－－立ち絵－－－－
 */
 .tachi_box{
-  text-align: center;
   background-image: url(../img/show.png);
   background-size: cover;
+  width: 100%;
+  margin-top: 10px;
 }
 /**/
 .tachi{
-  width: 90%;
+  width: 30%;
 }
 
 /*
@@ -440,11 +427,9 @@ margin-top: 20px;
   .balloon1-top {
     position: relative;
     display: inline-block;
-    margin: 1.5em 0;
-    padding: 7px 10px;
-    max-width: 500px;
+    margin: 15px 0 10px 0;
+    padding: 4px 7px;
     color: #555;
-    font-size: 16px;
     background: rgb(210, 247, 210);
   }
   .balloon1-top:before {
@@ -468,7 +453,6 @@ margin-top: 20px;
 progress {
   -webkit-appearance: none;
   width: 90%;
-  height: 30px;
 }
 ::-webkit-progress-bar {
   background-color: white;
