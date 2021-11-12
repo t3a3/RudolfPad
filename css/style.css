@@ -73,6 +73,23 @@ margin-top: 20px;
   font-size: 1.5rem;
 }
 
+.text_area2 {
+  background-color: #fff; /* 背景色 */
+  background-image: linear-gradient(90deg, transparent 0%, transparent 50%, #fff 50%, #fff 100%), /* 点線1の色 */
+                    linear-gradient(180deg, #ccc 1px, transparent 1px); /* 点線2の色と太さ */
+  background-size: 8px 100%, /* 点線1のサイズ */
+                   100% 1.5em; /* 点線2のサイズ */
+  line-height: 1.5em; /* 文字の高さ */
+  padding-bottom: 1px; /* 最終行の下にも罫線を引く */
+  color: black; /* 文字色 */
+  font-weight: bold; font-size: 130%;
+  width: 50%;
+  height: 100px;
+  font-size: 1.5rem;
+  margin-right: 10px;
+}
+
+
 /*
 －－－－ルドルフのテキストエリア－－－－
 */
@@ -168,7 +185,26 @@ margin-top: 20px;
     background: #775ffe;
     cursor: pointer;
   }
-
+/*－－SAVE2－－*/
+  .button4 {
+    color: #333;
+    font-size: 16px;
+    font-weight: bold;
+    background: #fff;
+    padding: 13px 25px;
+    border: 3px solid rgb(247, 158, 158);
+    box-shadow: 0 5px 0 rgb(247, 158, 158);
+    border-radius: 6px;
+    display: inline-block;
+    transition: .3s;
+  }
+  .button4:hover {
+    transform: translateY(5px);
+    box-shadow: 0 0 0 #333;
+    color: #fff;
+    background: rgb(247, 158, 158);
+    cursor: pointer;
+  }
 /*
 －－－－メイン画面右側の配置－－－－
 */
@@ -254,18 +290,30 @@ progress {
   width: 100%;
   transform: translate(-50%, -50%);
   color: rgba(250, 250, 250, 1);
-  font-size: 24px;
+  font-size: 15px;
   text-align: center;
 }
 #fullOverlay .text img{
   cursor: pointer;
 }
-
-
+#fullOverlay .text h2{
+  color: #fff;
+}
+.select_text{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.select_text div{
+  padding-top: 25px;
+}
 
 /* スマホ用（ウィンドウ幅が0〜479pxの場合に適用するCSS）*/
 @media screen and ( max-width:479px )
 {
+  h1{
+    font-size: 10px;
+  }
   #fullOverlay{
     position: absolute;
     left: 0; top: 0;
@@ -300,6 +348,13 @@ h2{
     color: #07573c;
     margin: 0;
   }
+  .select_text{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
 /*========= タイピング ===============*/
 .TextTyping span {
   display: none;
@@ -349,7 +404,21 @@ margin: 10px 0 10px 0;
   width: 90%;
   height: 50px;
 }
-
+.text_area2 {
+  background-color: #fff; /* 背景色 */
+  background-image: linear-gradient(90deg, transparent 0%, transparent 50%, #fff 50%, #fff 100%), /* 点線1の色 */
+                    linear-gradient(180deg, #ccc 1px, transparent 1px); /* 点線2の色と太さ */
+  background-size: 8px 100%, /* 点線1のサイズ */
+                   100% 1.3em; /* 点線2のサイズ */
+  line-height: 1.3em; /* 文字の高さ */
+  padding-bottom: 1px; /* 最終行の下にも罫線を引く */
+  color: black; /* 文字色 */
+  font-weight: bold; font-size: 130%;
+  width: 80%;
+  height: 60px;
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
 /*
 －－－－ルドルフのテキストエリア－－－－
 */
@@ -363,7 +432,7 @@ margin: 10px 0 10px 0;
   padding-bottom: 1px; /* 最終行の下にも罫線を引く */
   color: black; /* 文字色 */
   width: 100%;
-  height: 100px;
+  height: 120px;
   font-weight: bold; 
 }
 .TextTyping {
@@ -384,7 +453,7 @@ margin: 10px 0 10px 0;
   /*－－SAVE－－*/
   .button {
     color: #333;
-    font-size: 16px;
+    font-size: 10px;
     font-weight: bold;
     background: #fff;
     padding: 5px 10px;
@@ -409,7 +478,7 @@ margin: 10px 0 10px 0;
   /*－－できた！－－*/
   .button2 {
     color: #333;
-    font-size: 16px;
+    font-size: 10px;
     font-weight: bold;
     background: #fff;
     padding: 5px 10px;
@@ -429,7 +498,7 @@ margin: 10px 0 10px 0;
   /*－－ぴえん…－－*/
   .button3 {
     color: #333;
-    font-size: 16px;
+    font-size: 10px;
     font-weight: bold;
     background: #fff;
     padding: 5px 10px;
@@ -446,7 +515,26 @@ margin: 10px 0 10px 0;
     background: #775ffe;
     cursor: pointer;
   }
-
+/*－－SAVE2－－*/
+  .button4 {
+    color: #333;
+    font-size: 16px;
+    font-weight: bold;
+    background: #fff;
+    padding: 3px 8px;
+    border: 3px solid rgb(247, 158, 158);
+    box-shadow: 0 5px 0 rgb(247, 158, 158);
+    border-radius: 6px;
+    display: inline-block;
+    transition: .3s;
+  }
+  .button4:hover {
+    transform: translateY(5px);
+    box-shadow: 0 0 0 #333;
+    color: #fff;
+    background: rgb(247, 158, 158);
+    cursor: pointer;
+  }
 /*
 －－－－メイン画面右側の配置－－－－
 */
