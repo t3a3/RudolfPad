@@ -12,8 +12,25 @@
 </head>
 
 <body>
+    <div id="fullOverlay">
+        <div class="text">
+            <p>ウマ娘PAD</p>
+            <div id="mainImage">
+                <img src="img/rudorufu.png" width="300px" />
+            </div>
+            <p>
+                どの娘にする？
+            </p>
+            <div id="imageList">
+                <img src="img/teio_btn.png" alt="" id="teio_hyouji">
+                <img src="img/rudorufu_btn.png" alt="" id="rudolf_hyouji">
+                <img src="img/mac_btn.png" alt="" id="mac_hyouji">
+            </div>
+        </div>
+        <button id="reset">リセット</button>
+    </div>
     <header>
-        <h1>ルドルフPAD</h1>
+        <h1>ウマ娘PAD</h1>
     </header>
     <main class="main">
         <div class="memo_main_box" id="memo_main_box">
@@ -36,13 +53,14 @@
                 </div>
             </div>
             <div class="img_box">
+                <img src="" alt="">
                 <!--ルドルフ画像-->
                 <div class="tachi_box">
-                    <img src="img/rudorufu.png" alt="" class="tachi" id="tachi">
+                    <img src="" alt="" class="tachi" id="tachi">
                 </div>
                 <!--ルドルフ一言-->
                 <div class="balloon1-top">
-                    <p id="chara_text">唯一抜きん出て、並ぶもの無し</p>
+                    <p id="chara_text"></p>
                 </div>
                 <!--ルドルフ好感度-->
                 <progress id="okcounter" max="20" value="0"> 0% </progress>
@@ -51,90 +69,27 @@
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
-        ////////////////////ボタン類//////////////////////////
-        //保存ボタン//
-        $("#btn_save").on("click", function () {
-            const data = {
-                text: $("#text_area").val(),
-            };
-            const jasondata = JSON.stringify(data);
-            localStorage.setItem("memo", jasondata);
-        });
-        //できたボタン//
-        $("#clear_ok").one("click", function () {
-            $("#clear_no").attr("disabled", true);
+        $("#reset").one("click", function () {
             localStorage.removeItem("memo");
-            $("#text_area").val("");
-            var thisCount = $("#okcounter").val();
-            thisCount = Number(thisCount);
-            thisCount = thisCount + 5;
-            $("#okcounter").val(thisCount);
-            const mater = {
-                okcount: $("#okcounter").val(),
-            };
-            const jasondata2 = JSON.stringify(mater);
-            localStorage.setItem("koukando", jasondata2);
+            localStorage.removeItem("r_koukando");
+            localStorage.removeItem("t_koukando");
+            localStorage.removeItem("m_koukando");
         });
-        //ぴえんボタン//
-        $("#clear_no").one("click", function () {
-            $("#clear_ok").attr("disabled", true);
-            localStorage.removeItem("memo");
-            $("#text_area").val("");
-            var thisCount = $("#okcounter").val();
-            thisCount = Number(thisCount);
-            thisCount = thisCount - 5;
-            $("#okcounter").val(thisCount);
-            const mater = {
-                okcount: $("#okcounter").val(),
-            };
-            const jasondata2 = JSON.stringify(mater);
-            localStorage.setItem("koukando", jasondata2);
+        $(function () {
+            // 「imageList」内の「img」をマウスオーバーした場合
+            $("#teio_hyouji").hover(function () {
+                // マウスオーバーしている画像をメインの画像に反映
+                $("#mainImage img").attr("src", "img/teio.png");
+            });
+            $("#rudolf_hyouji").hover(function () {
+                // マウスオーバーしている画像をメインの画像に反映
+                $("#mainImage img").attr("src", "img/rudorufu.png");
+            });
+            $("#mac_hyouji").hover(function () {
+                // マウスオーバーしている画像をメインの画像に反映
+                $("#mainImage img").attr("src", "img/mac.png");
+            });
         });
-        ////////////////////ボタン類//////////////////////////
-
-        ////////////////////メモ内容読み込む//////////////////////////
-        if (localStorage.getItem("memo")) {
-            const jasondata = localStorage.getItem("memo");
-            const data = JSON.parse(jasondata);
-            $("#text_area").val(data.text);
-            $("#count_btn").show();
-        } else {
-            $("#count_btn").hide();
-        };
-        ////////////////////メモ内容読み込む//////////////////////////
-
-        ////////////////////高感度読み込む//////////////////////////
-        if (localStorage.getItem("koukando")) {
-            const jasondata2 = localStorage.getItem("koukando");
-            const mater = JSON.parse(jasondata2);
-            $("#okcounter").val(mater.okcount);
-        }
-        ////////////////////高感度読み込む//////////////////////////
-
-        ////////////////////画面読み込み時テキスト//////////////////////////
-        window.onload = function () {
-            if ($("#okcounter").val() === 0) {
-                $("#TextTyping").html("本校は、全国のウマ娘トレーニング施設の中でも、最大規模、十全十美のカリキュラムで、優美高妙なウマ娘と切磋琢磨し、己の研鑽に粉骨砕身の努力で、品行方正……");
-            }
-            else if ($("#okcounter").val() === 5) {
-                $("#chara_text").html("生姜がないなんて、しょうがないなぁ。ふふっ");
-                $("#TextTyping").html("勝利もさることながら、如何様な勝ち方をするか……そこにも意識を向けたいものだ");
-            }
-            else if ($("#okcounter").val() === 10) {
-                $("#chara_text").html("いもが、ポテっとおちた。ふふっ");
-                $("#TextTyping").html("近ごろのトレーナー君を見ていると、私もやる気が溢れてくる。さっそく夕日を見ながら腹筋を3セット……サンセット……ふふっ");
-            }
-            else if ($("#okcounter").val() === 15) {
-                $("#chara_text").html("この蔵、クーラーがきいている…。ふふっ");
-                $("#TextTyping").html("我々の理想はいまだ遠く、仕事は枚挙に暇がない。この先も休息などないぞ。それでも君は……やはり隣に、立ち続けてくれるのだろう");
-            }
-            else if ($("#okcounter").val() === 20) {
-                $("#chara_text").html("調子は最高だ。トレーニングにさぁ行こう！");
-                $("#TextTyping").html("さすがは私のトレーナー君だ、いつも感謝しているよ。レースには絶対はないが、今の私とトレーナー君なら見せれるだろう……絶対の走りを");
-            }
-        };
-        ////////////////////画面読み込み時テキスト//////////////////////////
-
         ////////////////////タイピング風テキスト//////////////////////////
         // TextTypingというクラス名がついている子要素（span）を表示から非表示にする定義
         function TextTypingAnime() {
@@ -182,8 +137,331 @@
                 $(this).html(textbox);
             });
             TextTypingAnime();/* アニメーション用の関数を呼ぶ*/
-        });// ここまで画面が読み込まれたらすぐに動かしたい場合の記述
+        });
+        // ここまで画面が読み込まれたらすぐに動かしたい場合の記述
         ////////////////////タイピング風テキスト//////////////////////////
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////ルドルフ////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        $("#rudolf_hyouji").on("click", function () {
+            $('#fullOverlay').css({
+                'display': 'none',
+                'z-index': -1
+            });
+            $("#tachi").attr("src", "img/rudorufu.png")
+            ////////////////////ボタン類//////////////////////////
+            //保存ボタン//
+            $("#btn_save").on("click", function () {
+                const data = {
+                    text: $("#text_area").val(),
+                };
+                const jasondata = JSON.stringify(data);
+                localStorage.setItem("memo", jasondata);
+            });
+            //できたボタン//
+            $("#clear_ok").one("click", function () {
+                $("#clear_no").attr("disabled", true);
+                localStorage.removeItem("memo");
+                $("#text_area").val("");
+                var thisCount = $("#okcounter").val();
+                thisCount = Number(thisCount);
+                thisCount = thisCount + 5;
+                $("#okcounter").val(thisCount);
+                const r_mater = {
+                    okcount: $("#okcounter").val(),
+                };
+                const r_jasondata2 = JSON.stringify(r_mater);
+                localStorage.setItem("r_koukando", r_jasondata2);
+            });
+            //ぴえんボタン//
+            $("#clear_no").one("click", function () {
+                $("#clear_ok").attr("disabled", true);
+                localStorage.removeItem("memo");
+                $("#text_area").val("");
+                var thisCount = $("#okcounter").val();
+                thisCount = Number(thisCount);
+                thisCount = thisCount - 5;
+                $("#okcounter").val(thisCount);
+                const r_mater = {
+                    okcount: $("#okcounter").val(),
+                };
+                const r_jasondata2 = JSON.stringify(r_mater);
+                localStorage.setItem("r_koukando", r_jasondata2);
+            });
+            ////////////////////ボタン類//////////////////////////
+
+            ////////////////////メモ内容読み込む//////////////////////////
+            if (localStorage.getItem("memo")) {
+                const jasondata = localStorage.getItem("memo");
+                const data = JSON.parse(jasondata);
+                $("#text_area").val(data.text);
+                $("#count_btn").show();
+            } else {
+                $("#count_btn").hide();
+            };
+            ////////////////////メモ内容読み込む//////////////////////////
+
+            ////////////////////好感度読み込む//////////////////////////
+            if (localStorage.getItem("r_koukando")) {
+                const r_jasondata2 = localStorage.getItem("r_koukando");
+                const r_mater = JSON.parse(r_jasondata2);
+                $("#okcounter").val(r_mater.okcount);
+            }
+            ////////////////////好感度読み込む//////////////////////////
+
+            ////////////////////画面読み込み時テキスト//////////////////////////
+            if ($("#okcounter").val() === 0) {
+                $("#chara_text").html("唯一抜きん出て並ぶ者なし");
+                $("#TextTyping").html("本校は、全国のウマ娘トレーニング施設の中でも、最大規模、十全十美のカリキュラムで、優美高妙なウマ娘と切磋琢磨し、己の研鑽に粉骨砕身の努力で、品行方正……");
+            }
+            else if ($("#okcounter").val() === 5) {
+                $("#chara_text").html("生姜がないなんて、しょうがないなぁ。ふふっ");
+                $("#TextTyping").html("勝利もさることながら、如何様な勝ち方をするか……そこにも意識を向けたいものだ");
+            }
+            else if ($("#okcounter").val() === 10) {
+                $("#chara_text").html("いもが、ポテっとおちた。ふふっ");
+                $("#TextTyping").html("近ごろのトレーナー君を見ていると、私もやる気が溢れてくる。さっそく夕日を見ながら腹筋を3セット……サンセット……ふふっ");
+            }
+            else if ($("#okcounter").val() === 15) {
+                $("#chara_text").html("この蔵、クーラーがきいている…。ふふっ");
+                $("#TextTyping").html("我々の理想はいまだ遠く、仕事は枚挙に暇がない。この先も休息などないぞ。それでも君は……やはり隣に、立ち続けてくれるのだろう");
+            }
+            else if ($("#okcounter").val() === 20) {
+                $("#chara_text").html("調子は最高だ。トレーニングにさぁ行こう！");
+                $("#TextTyping").html("さすがは私のトレーナー君だ、いつも感謝しているよ。レースには絶対はないが、今の私とトレーナー君なら見せれるだろう……絶対の走りを");
+            }
+
+            ////////////////////画面読み込み時テキスト//////////////////////////
+            var element = $(".TextTyping");
+            element.each(function () {
+                var text = $(this).html();
+                var textbox = "";
+                text.split('').forEach(function (t) {
+                    if (t !== " ") {
+                        textbox += '<span>' + t + '</span>';
+                    } else {
+                        textbox += t;
+                    }
+                });
+                $(this).html(textbox);
+            });
+            TextTypingAnime();
+        });
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////テイオー////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        $("#teio_hyouji").on("click", function () {
+            $('#fullOverlay').css({
+                'display': 'none',
+                'z-index': -1
+            });
+            $("#tachi").attr("src", "img/teio.png")
+            ////////////////////ボタン類//////////////////////////
+            //保存ボタン//
+            $("#btn_save").on("click", function () {
+                const data = {
+                    text: $("#text_area").val(),
+                };
+                const jasondata = JSON.stringify(data);
+                localStorage.setItem("memo", jasondata);
+            });
+            //できたボタン//
+            $("#clear_ok").one("click", function () {
+                $("#clear_no").attr("disabled", true);
+                localStorage.removeItem("memo");
+                $("#text_area").val("");
+                var thisCount = $("#okcounter").val();
+                thisCount = Number(thisCount);
+                thisCount = thisCount + 5;
+                $("#okcounter").val(thisCount);
+                const t_mater = {
+                    okcount: $("#okcounter").val(),
+                };
+                const t_jasondata2 = JSON.stringify(t_mater);
+                localStorage.setItem("t_koukando", t_jasondata2);
+            });
+            //ぴえんボタン//
+            $("#clear_no").one("click", function () {
+                $("#clear_ok").attr("disabled", true);
+                localStorage.removeItem("memo");
+                $("#text_area").val("");
+                var thisCount = $("#okcounter").val();
+                thisCount = Number(thisCount);
+                thisCount = thisCount - 5;
+                $("#okcounter").val(thisCount);
+                const t_mater = {
+                    okcount: $("#okcounter").val(),
+                };
+                const t_jasondata2 = JSON.stringify(t_mater);
+                localStorage.setItem("t_koukando", t_jasondata2);
+            });
+            ////////////////////ボタン類//////////////////////////
+
+            ////////////////////メモ内容読み込む//////////////////////////
+            if (localStorage.getItem("memo")) {
+                const jasondata = localStorage.getItem("memo");
+                const data = JSON.parse(jasondata);
+                $("#text_area").val(data.text);
+                $("#count_btn").show();
+            } else {
+                $("#count_btn").hide();
+            };
+            ////////////////////メモ内容読み込む//////////////////////////
+
+            ////////////////////好感度読み込む//////////////////////////
+            if (localStorage.getItem("t_koukando")) {
+                const t_jasondata2 = localStorage.getItem("t_koukando");
+                const t_mater = JSON.parse(t_jasondata2);
+                $("#okcounter").val(t_mater.okcount);
+            }
+            ////////////////////好感度読み込む//////////////////////////
+
+            ////////////////////画面読み込み時テキスト//////////////////////////
+            if ($("#okcounter").val() === 0) {
+                $("#chara_text").html("トウカイテイオーいっくよ～♪");
+                $("#TextTyping").html("やあやあトレーナー君！ 元気かね？ワガハイ、今日は『帝王』らしく喋ってみることに決めたぞよ♪威厳マシマシでイイ感じ…… じゃなくて、素晴らしいと思わないかね？");
+            }
+            else if ($("#okcounter").val() === 5) {
+                $("#chara_text").html("よーし、やるぞ～！ちゃんと見ててよね！");
+                $("#TextTyping").html("トレーナー。もし悩み事があるのなら、ボクのことじゃんじゃん頼っていーよ！だってボクは無敵の帝王様だからね！");
+            }
+            else if ($("#okcounter").val() === 10) {
+                $("#chara_text").html("はちみーはちみーはちみー♪");
+                $("#TextTyping").html("トレーナー最近いい感じだね～♪もちろんボクもいい感じだよ！だからそろそろ無敵のテイオー様のレース、見たくないかね～？");
+            }
+            else if ($("#okcounter").val() === 15) {
+                $("#chara_text").html("『帝王』目指して、頑張ろうね！");
+                $("#TextTyping").html("ちょっと聞いてよトレーナー！マヤノが『恋を知らないテイオーちゃんはまだまだコドモだよね～』って言うんだ！ボクだって恋の1つや2つできるやい！");
+            }
+            else if ($("#okcounter").val() === 20) {
+                $("#chara_text").html("これからも一緒に頑張ろうね、トレーナー♪");
+                $("#TextTyping").html("これからもよろしくねトレーナー！無敵のテイオー伝説には、絶対にキミが必要なんだからっ！");
+            }
+
+            ////////////////////画面読み込み時テキスト//////////////////////////
+            var element = $(".TextTyping");
+            element.each(function () {
+                var text = $(this).html();
+                var textbox = "";
+                text.split('').forEach(function (t) {
+                    if (t !== " ") {
+                        textbox += '<span>' + t + '</span>';
+                    } else {
+                        textbox += t;
+                    }
+                });
+                $(this).html(textbox);
+            });
+            TextTypingAnime();
+        });
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////マック////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        $("#mac_hyouji").on("click", function () {
+            $('#fullOverlay').css({
+                'display': 'none',
+                'z-index': -1
+            });
+            $("#tachi").attr("src", "img/mac.png")
+            ////////////////////ボタン類//////////////////////////
+            //保存ボタン//
+            $("#btn_save").on("click", function () {
+                const data = {
+                    text: $("#text_area").val(),
+                };
+                const jasondata = JSON.stringify(data);
+                localStorage.setItem("memo", jasondata);
+            });
+            //できたボタン//
+            $("#clear_ok").one("click", function () {
+                $("#clear_no").attr("disabled", true);
+                localStorage.removeItem("memo");
+                $("#text_area").val("");
+                var thisCount = $("#okcounter").val();
+                thisCount = Number(thisCount);
+                thisCount = thisCount + 5;
+                $("#okcounter").val(thisCount);
+                const m_mater = {
+                    okcount: $("#okcounter").val(),
+                };
+                const m_jasondata2 = JSON.stringify(m_mater);
+                localStorage.setItem("m_koukando", m_jasondata2);
+            });
+            //ぴえんボタン//
+            $("#clear_no").one("click", function () {
+                $("#clear_ok").attr("disabled", true);
+                localStorage.removeItem("memo");
+                $("#text_area").val("");
+                var thisCount = $("#okcounter").val();
+                thisCount = Number(thisCount);
+                thisCount = thisCount - 5;
+                $("#okcounter").val(thisCount);
+                const m_mater = {
+                    okcount: $("#okcounter").val(),
+                };
+                const m_jasondata2 = JSON.stringify(m_mater);
+                localStorage.setItem("m_koukando", m_jasondata2);
+            });
+            ////////////////////ボタン類//////////////////////////
+
+            ////////////////////メモ内容読み込む//////////////////////////
+            if (localStorage.getItem("memo")) {
+                const jasondata = localStorage.getItem("memo");
+                const data = JSON.parse(jasondata);
+                $("#text_area").val(data.text);
+                $("#count_btn").show();
+            } else {
+                $("#count_btn").hide();
+            };
+            ////////////////////メモ内容読み込む//////////////////////////
+
+            ////////////////////好感度読み込む//////////////////////////
+            if (localStorage.getItem("m_koukando")) {
+                const m_jasondata2 = localStorage.getItem("m_koukando");
+                const m_mater = JSON.parse(m_jasondata2);
+                $("#okcounter").val(m_mater.okcount);
+            }
+            ////////////////////好感度読み込む//////////////////////////
+
+            ////////////////////画面読み込み時テキスト//////////////////////////
+            if ($("#okcounter").val() === 0) {
+                $("#chara_text").html("メジロの強さ、見せて差し上げます！");
+                $("#TextTyping").html("メジロのウマ娘として、自らを律する強さは必要不可欠……。そう、これは私に課せられた試練の1つなのでしょう。どんな誘惑であろうと……例えそれが学食の限定モンブランであろうと");
+            }
+            else if ($("#okcounter").val() === 5) {
+                $("#chara_text").html("勇戦あるのみ、ですわ。");
+                $("#TextTyping").html("どのようなレースであっても、勝利を目指して走るのは当然のこと。しかし……ただ勝つだけでは、不十分なのです。私の名に課せられた使命は、優雅で華麗で圧倒的なまでの勝利");
+            }
+            else if ($("#okcounter").val() === 10) {
+                $("#chara_text").html("ビシバシと、参りますわよっ！");
+                $("#TextTyping").html("目先の勝利にこだわるばかりでは足元が揺らぎます。結果だけでなく過程も重視していきたいですわね");
+            }
+            else if ($("#okcounter").val() === 15) {
+                $("#chara_text").html("歩んで参りましょう…宿志への道を。");
+                $("#TextTyping").html("不思議ですわね、トレーナーさんにならつい悩みを打ち明けてしまいます");
+            }
+            else if ($("#okcounter").val() === 20) {
+                $("#chara_text").html("ふふっ♪胸が躍りますわね！");
+                $("#TextTyping").html("最初は自己管理もできない未熟者でした。頼れるトレーナーさんに出会って本当によかったですわ。これからも共に参りましょう");
+            }
+
+            ////////////////////画面読み込み時テキスト//////////////////////////
+            var element = $(".TextTyping");
+            element.each(function () {
+                var text = $(this).html();
+                var textbox = "";
+                text.split('').forEach(function (t) {
+                    if (t !== " ") {
+                        textbox += '<span>' + t + '</span>';
+                    } else {
+                        textbox += t;
+                    }
+                });
+                $(this).html(textbox);
+            });
+            TextTypingAnime();
+        });
     </script>
 </body>
 
